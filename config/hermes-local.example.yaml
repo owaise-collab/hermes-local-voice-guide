@@ -1,0 +1,68 @@
+# MERGE these blocks into the active config.yaml; do not replace a whole config.
+# Match endpoint, alias, and context to your actual running llama.cpp server.
+model:
+  default: local-hermes
+  provider: llamacpp
+  base_url: http://127.0.0.1:8080/v1
+  api_key: local-only
+  context_length: 65536
+
+providers:
+  llamacpp:
+    base_url: http://127.0.0.1:8080/v1
+    model: local-hermes
+    api_key: local-only
+
+fallback_providers: []
+# Remove a legacy fallback_model if present and you want local-only model routing.
+auxiliary:
+  compression: {provider: main, model: '', base_url: '', api_key: '', fallback_chain: []}
+  title_generation: {provider: main, model: '', base_url: '', api_key: '', fallback_chain: []}
+  approval: {provider: main, model: '', base_url: '', api_key: '', fallback_chain: []}
+  skills_hub: {provider: main, model: '', base_url: '', api_key: '', fallback_chain: []}
+  mcp: {provider: main, model: '', base_url: '', api_key: '', fallback_chain: []}
+
+delegation:
+  backend: default
+  max_iterations: 40
+  max_concurrent_children: 1
+  max_spawn_depth: 1
+  subagent_auto_approve: false
+  model: local-hermes
+  base_url: http://127.0.0.1:8080/v1
+  api_key: local-only
+  api_mode: chat_completions
+  fallback_providers: []
+
+stt:
+  enabled: true
+  provider: local
+  language: en
+  local:
+    model: base
+    device: cpu
+    compute_type: int8
+    vad: true
+
+tts:
+  provider: piper
+  speed: 1.0
+  piper:
+    voice: en_US-lessac-medium
+    use_cuda: false
+
+voice:
+  record_key: ctrl+b
+  auto_tts: true
+  beep_enabled: true
+  max_recording_seconds: 120
+  silence_threshold: 200
+  silence_duration: 2.0
+  stop_phrases: [stop, goodbye hermes]
+
+skills:
+  creation_nudge_interval: 10
+
+# Keep other platform entries and merge these into an existing cli list.
+platform_toolsets:
+  cli: [hermes-cli, skills, delegation, terminal, file, memory, session_search, tts]
