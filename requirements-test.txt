@@ -1,0 +1,2 @@
+# Only for a separate contributor test environment. Do not pip-install into Hermes.
+ruamel.yaml==0.18.16

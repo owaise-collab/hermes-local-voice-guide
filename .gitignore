@@ -1,0 +1,27 @@
+# Never commit Hermes user state, model weights, recordings, or credentials.
+.env
+.env.*
+!.env.example
+auth.json
+*.key
+*.pem
+*.gguf
+*.onnx
+*.bin
+*.wav
+*.mp3
+*.ogg
+*.db
+*.db-*
+__pycache__/
+*.pyc
+.venv/
+runtime/
+logs/
+audio_cache/
+backups/
+models/
+sessions/
+memories/
+*.partial
+*.part*
